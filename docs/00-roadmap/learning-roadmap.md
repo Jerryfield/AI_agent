@@ -57,7 +57,7 @@ Project
 - [x] 创建 knowledge-map.md
 - [x] 创建 learning-roadmap.md
 - [x] 创建 progress.md
-- [ ] 创建笔记模板
+- [x] 创建笔记模板
 - [x] 配置 .gitignore
 - [x] 创建远程 Git Repository
 - [x] 完成第一次 Commit

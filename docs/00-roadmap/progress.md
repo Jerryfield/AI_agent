@@ -61,23 +61,23 @@ Status：
 - [x] knowledge-map.md
 - [x] learning-roadmap.md
 - [x] progress.md
-- [ ] note templates
+- [x] note templates
 
 ### Git
 
-- [ ] git init
-- [ ] .gitignore
-- [ ] remote repository
-- [ ] first commit
-- [ ] first push
+- [x] git init
+- [x] .gitignore
+- [x] remote repository
+- [x] first commit
+- [x] first push
 
 ### Tools
 
-- [ ] Python
-- [ ] uv / pip
-- [ ] VS Code
-- [ ] Obsidian
-- [ ] Git
+- [x] Python
+- [x] uv / pip
+- [x] VS Code
+- [x] Obsidian
+- [x] Git
 
 ---
 
@@ -85,10 +85,10 @@ Status：
 
 ## Now
 
-- [ ] 完成 Agent Engineering 知识库初始化
-- [ ] 完成 Knowledge Map
-- [ ] 完成 Learning Roadmap
-- [ ] 完成 Note Templates
+- [x] 完成 Agent Engineering 知识库初始化
+- [x] 完成 Knowledge Map
+- [x] 完成 Learning Roadmap
+- [x] 完成 Note Templates
 
 ## Next
 
