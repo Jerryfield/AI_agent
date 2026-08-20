@@ -1,4 +1,4 @@
-# Agent Core Components
+# Agent核心组件
 
 > 记录 Agent 的核心组成及关键边界，避免展开到具体框架实现。
 
@@ -9,25 +9,48 @@
 一个典型 Agent 可以抽象为：
 
 ```text
-Goal
- ↓
-Instructions
- ↓
-Context
- ↓
-Model
- ↓
-Decision
- ↓
-Tool / Final Answer
- ↓
-Observation
- ↓
-State Update
- ↓
-Agent Loop
- ↓
-Stop
+                         User Goal
+                            │
+                            ▼
+                    ┌───────────────┐
+                    │ Instructions  │
+                    └───────┬───────┘
+                            │
+             ┌──────────────▼──────────────┐
+             │           Context           │
+             │                             │
+             │ User Input                  │
+             │ State                       │
+             │ Memory                      │
+             │ Retrieved Knowledge         │
+             │ Tool Results                │
+             └──────────────┬──────────────┘
+                            │
+                            ▼
+                     ┌────────────┐
+                     │   Model    │
+                     └─────┬──────┘
+                           │
+                     Decide Next
+                           │
+             ┌─────────────┴─────────────┐
+             │                           │
+         Tool Call                   Final Answer
+             │                           │
+             ▼                           ▼
+       Guardrails / HITL           Output Guardrail
+             │                           │
+             ▼                           ▼
+           Tool                    Stop Condition
+             │
+             ▼
+        Tool Result
+             │
+             ▼
+        Update State
+             │
+             ▼
+       Agent Loop Again
 ```
 
 常见核心组件：
@@ -381,15 +404,45 @@ HITL
 
 ## 16. Interview Questions
 
-1. Agent 通常由哪些核心组件组成？
-2. Model 和 Agent 有什么区别？
-3. Context、State、Memory 有什么区别？
-4. Tool 在 Agent 中承担什么作用？
-5. Agent Loop 是什么？
-6. 为什么需要 Stop Condition？
-7. Instructions 和 Guardrails 有什么区别？
-8. Guardrails 和 HITL 有什么区别？
-9. 为什么高风险 Tool 通常需要 HITL？
+1. **Agent 通常由哪些核心组件组成？**
+
+   Agent 是一个由 Model 决策、Tools 行动、Context/State/Memory 提供信息，并通过 Loop 持续运行，同时由 Stop Condition、Guardrails 和 HITL 控制边界的系统。
+
+2. **Model 和 Agent 有什么区别？**
+
+​	Model 负责“思考和决策”，Agent 负责“围绕目标持续运行并完成任务”。
+
+3. **Context、State、Memory 有什么区别？**
+
+```
+State ──┐
+        ├── select / retrieve ──→ Context ──→ Model
+Memory ─┘
+```
+
+4. **Tool 在 Agent 中承担什么作用？**
+
+​	Tool 让 Agent 从“只能生成文本”变成“可以与外部环境交互”。
+
+5. **Agent Loop 是什么？**
+
+​	Agent Loop 让模型能够根据真实执行结果不断调整下一步行动。
+
+6. **为什么需要 Stop Condition？**
+
+​	避免死循环，不可控制行为
+
+7. **Instructions 和 Guardrails 有什么区别？**
+
+​	Instructions 是“告诉模型不要做”，Guardrails 是“系统不允许它做”。
+
+8. **Guardrails 和 HITL 有什么区别？**
+
+​	Guardrails系统自动判断，HITL由人来决定
+
+9. **为什么高风险 Tool 通常需要 HITL？**
+
+​	因为 LLM 的决策并不是绝对可靠的，而某些 Tool 一旦执行会产生真实、不可逆或高成本影响。把高影响决策的最终责任和控制权保留在人类或业务系统手中。
 
 ---
 
